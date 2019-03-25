@@ -1,0 +1,99 @@
+# depslib dependency file v1.0
+1526699317 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\main.cpp
+	"Enteros.h"
+	"gemoetricos.h"
+	"granja.h"
+	"numericos.h"
+	"reales.h"
+	"probarreglos.h"
+	"otros.h"
+	"menu.h"
+	"matrices.h"
+	<iostream>
+
+1525991138 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\granja.cpp
+	"granja.h"
+
+1524941326 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\granja.h
+
+1525995216 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\numericos.cpp
+	"numericos.h"
+
+1526700988 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\reales.cpp
+	"Reales.h"
+	"Enteros.h"
+
+1525999556 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\gemoetricos.cpp
+	"Enteros.h"
+	"Reales.h"
+	"gemoetricos.h"
+
+1525995215 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\numericos.h
+
+1524962012 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\reales.h
+
+1526701024 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\enteros.cpp
+	"Enteros.h"
+
+1526701081 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\enteros.h
+
+1525214127 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\gemoetricos.h
+
+1526001775 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\otros.cpp
+	"otros.h"
+	"Reales.h"
+
+1525034366 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\otros.h
+
+1526685911 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\probarreglos.cpp
+	"probarreglos.h"
+	"numericos.h"
+	"Reales.h"
+
+1526685953 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\probarreglos.h
+
+1526686188 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\menu.h
+
+1526700145 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\menu.cpp
+	"Enteros.h"
+	"gemoetricos.h"
+	"granja.h"
+	"numericos.h"
+	"reales.h"
+	"probarreglos.h"
+	"otros.h"
+	"menu.h"
+	"conjuntosarreglos.h"
+	"Arreglos.h"
+	"matrices.h"
+	<iostream>
+
+1526699041 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\matrices.cpp
+	"matrices.h"
+	"numericos.h"
+	"Reales.h"
+	"Arreglos.h"
+	"conjuntosarreglos.h"
+	<iostream>
+
+1526695956 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\matrices.h
+
+1526684969 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\arreglos.cpp
+	"Arreglos.h"
+
+1526684925 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\arreglos.h
+
+1526692782 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\conjuntosarreglos.cpp
+	"conjuntosarreglos.h"
+	<iostream>
+
+1526692755 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\conjuntosarreglos.h
+
+1526701121 source:c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\polinomios.cpp
+	"polinomios.h"
+	"numericos.h"
+	"Reales.h"
+	"Enteros.h"
+
+1526700901 c:\users\ricar\documents\proyectos codeblock\ejercicios funciones\polinomios.h
+

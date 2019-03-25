@@ -1,0 +1,3236 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel} 
+\usepackage{amsmath}
+\usepackage{amsxtra}
+\usepackage{amstext}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{colonequals}
+
+\decimalpoint
+\renewcommand{\baselinestretch}{1.1}	
+\theoremstyle{plain}
+    \newtheorem*{proposition}{Proposición}
+    \newtheorem*{theorem}{Teorema}
+    \newtheorem*{corollary}{Corolario}
+    \newtheorem*{property}{Propiedad}
+    \newtheorem*{note}{Nota}
+\theoremstyle{definition}
+    \newtheorem*{definition}{Definición}
+    \newtheorem{example}{Ejemplo} 
+    \newtheorem*{examples}{Ejemplos}
+    \newtheorem{problem}{Problema}  
+    \newtheorem*{solution}{Solución}   
+    \newtheorem*{properties}{Propiedades}
+
+\title{Programación de computadores 2018-I}
+\author{Ricardo Andrés Calvo Méndez\\Documento: 1000861255}
+\date{Mayo 2018}
+
+
+\begin{document}
+
+\maketitle
+
+\section{La Granja.}
+En una granja se crían un número de \emph{v} - Vacas, \emph{a} - Aves (pollos y gallinas) y \emph{e} - escorpiones. Las vacas estan encerradas en un corral de \emph{n}\emph{m} metros cuadrados, las aves en un galpón y los escorpiones en vitrinas.
+
+\begin{problem} \emph{La leche.}\\
+\hspace*{7mm}Si una vaca necesita \emph{m} metros cuadrados de pasto para producir \emph{x} litros de leche, ¿Cuántos litros de leche se producen en la granja?
+\begin{description}
+\item[granja.h :] Linea 4. \item[granja.cpp :] Lineas 3-5.
+
+\item[Modelo Matemático:]
+%
+La relación de la leche con los metros cuadrados de pasto es directamente proporcional; para ello se establecen las siguientes variables:
+\begin{align*}
+x &\colonequals \text{Leche producida por m metros cuadrados de pasto.}\\
+m &\colonequals \text{Metros cuadrados de pasto que se requieren para producir x litros de leche.}\\
+t &\colonequals \text{Metros cuadrados totales de pasto.}
+\end{align*}
+
+Entonces:
+\begin{align*}
+Leche: \mathbb{R} \times\mathbb{R}\times\mathbb{R}&\to \mathbb{R}\\
+(m,x,t) &\mapsto \begin{cases}
+\dfrac{xt}{m}\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Leche(double m, double x,double t){
+    return x/m*t;
+};
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Los huevos.}\\
+\hspace*{7mm}Si una tarecera parte de las aves que hay en la granja son gallinas, y la mitad de las gallinas ponen 1 huevo cada 3 días y la otra mitad 1 huevo cada 5 días, en un mes ¿Cuántos huevos producen? (1 mes = 30 días).
+%
+\begin{description}
+\item[granja.h :] Linea 5. \item[granja.cpp :] Lineas 7-9.
+
+\item[Modelo Matemático:]
+%
+Se puede decucir que las gallinas que ponen huevos son solamente un sexto del total de aves, además la función debe devolver la parte entera porque una cantidad de huevos es un número natual. \\
+Entonces:
+%Huevos: \mathbb{N} &\to \mathbb{N}\\
+%(m,x,t) &\mapsto \begin{cases}
+%\end{cases}
+%\[\floor*[\big]{\frac{a}{6}\left(\frac{30}{3}+\frac{30}{6}\right)}\]
+\begin{align*}
+Huevos: \mathbb{N} &\to \mathbb{N}\\
+(a) &\mapsto
+\begin{cases}
+\lfloor\frac{a}{6}\left(\frac{30}{3}+\frac{30}{6}\right)\rfloor = \lfloor\frac{5}{2}a\rfloor\\
+\end{cases}
+\end{align*}
+\item[Codificación \textsf{C++}:]\hfill
+
+%
+\begin{verbatim}
+int Huevos (int a){
+    return (int)(5.0/2*a);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+
+\begin{problem} \emph{La población de escorpiones.}\\
+\hspace*{7mm}Si los escorpiones de la granja se venden a China, y hay escorpiones de tres diferentes tamaños, \emph{p} - pequeños (con un peso de 20 gramos), \emph{m} - medianos (con un peso 30 gramos) y \emph{g} - grandes (con un peso de 50 gramos), ¿Cúantos kilos de escorpiones se pueden vender sin que decrezca la población a menos de dos tercios?
+%
+\begin{description}
+\item[granja.h :] Linea 6. \item[granja.cpp :] Lineas 11-13.
+
+\item[Modelo Matemático:]
+%
+Unicamente se puede vender una tercera parte de los escorpiones entre pequeños, medianos y grandes; tambien se debe tener en cuenta las unidades de masa (convertir de gramos a kilogramos). \\
+Entonces:
+\begin{align*}
+Escorpiones: \mathbb{N}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{R}\\
+(p,m,g) &\mapsto
+\begin{cases}
+\dfrac{1}{3}\left(p*\dfrac{2}{100}+m*\dfrac{3}{100}+g*\dfrac{5}{100}\right)\\
+\end{cases}
+\end{align*}
+\\
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Escorpiones (int p, int m, int g){
+    return (1/3.0)*(p*(2/100.0)+m*(3/100.0)+g*(5/100.0));
+};
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+
+\begin{problem} \emph{La Reparación del Corral.}\\
+\hspace*{7mm}Al granjero se le daño el corral y no sabe si volver a cercar el corral con madera,  alambre de puas o poner reja de metal. Si va a cercar con madera debe poner 4 hileras de tablas, con varilla 8 hileras y con alambre solo 5 hileras, el quiere saber que es lo menos costoso para cercar si sabe que el alambre de puas vale \emph{p} por metro, las tablas a \emph{q} por metro y las varillas \emph{s} por metro. Dado el tamaño del corral y los precios de los elementos, ¿cuál cercamiento es mas económico?
+%
+\begin{description}
+\item[granja.h :] Linea 7. \item[granja.cpp :] Lineas 15-25.
+
+\item[Modelo Matemático:]
+%
+El tamaño del corral es irrelevante, ya que lo que importa es la cantidad de material utilizado por metro cuadrado. \\
+Entonces:
+\begin{align*}
+Cerca: \mathbb{R}\times\mathbb{R}\times\mathbb{R} &\to \mathbb{ASCII}^{*}\\
+(p,q,s) &\mapsto
+\begin{cases}
+Madera, &4q\leq 5p \wedge 4q\leq 8s\\
+Varilla, &8s \leq 4q \wedge 8s\leq 5p\\
+Alambre, &\text{En otro caso.}\\
+\end{cases}
+\end{align*}
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+char* Cerca (double p, double q, double s){
+    if(q*4<=p*5&&q*4<=s*8){
+        return "Madera";
+    }else{
+        if(s*8<=q*4&&s*8<=p*5){
+            return "Varilla";
+        }else{
+            return "Alambre";
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+
+\section{Numéricos.}
+
+
+\begin{problem} \emph{La potencia de un número.}\\
+\hspace*{7mm}Función potencia de un entero elevado a un entero.
+%
+\begin{description}
+\item[numericos.h :] Linea 4. \item[numericos.cpp :] Lineas 3-15.
+
+\item[Modelo Matemático:]
+\begin{align*}
+Potencia: \mathbb{R} \times\mathbb{Z}&\to \mathbb{R}\\
+(a,b) &\mapsto \begin{cases}
+a^{b}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Potencia(double a, int b){
+    if(b==0){
+        return 1;
+    }else{
+        if(b<0){
+            return 1.0/(Potencia(a,-b));
+        }else{
+            if(b>0){
+                return a*Potencia(a,b-1);
+            };
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Número que divide a otro.}\\
+\hspace*{7mm}Una función que determine si un número es divisible por otro.
+%
+\begin{description}
+\item[numericos.h :] Linea 5. \item[numericos.cpp :] Lineas 17-27.
+
+\item[Modelo Matemático:]
+\begin{align*}
+Divisible: \mathbb{Z} \times\mathbb{Z}&\to \mathbb{B}\\
+(a,b) &\mapsto \begin{cases}
+\mathbb{T},&\frac{a}{b} \in \mathbb{Z}\\
+\mathbb{F},&\frac{a}{b} \not\in \mathbb{Z}\vee b\neq 0\\
+\end{cases}
+\end{align*}
+%
+\\
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool Divisible(int a, int b){
+    if(b==0){
+        return false;
+    }else{
+        if(a%b==0){
+            return true;
+        }else{
+            return false;
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Número primo.}\\
+\hspace*{7mm}Determinar si un número es primo.
+%
+\begin{description}
+\item[numericos.h :] Linea 6. \item[numericos.cpp :] Lineas 29-47.
+
+\item[Modelo Matemático:]
+\begin{align*}
+Primo: \mathbb{Z^{+}} &\to \mathbb{B}\\
+(a) &\mapsto \begin{cases}
+\mathbb{T},& a=2\vee \forall n \in \left(\mathbb{Z^{+}}-\lbrace{1,a}\rbrace\right):\frac{a}{n} \not\in \mathbb{Z}\\
+\mathbb{F},& a=1\vee \exists n \in \left(\mathbb{Z^{+}}-\lbrace{1,a}\rbrace\right):\frac{a}{n} \in \mathbb{Z}\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool Primo (int a){
+    int n = a-1;
+    if(a==2){
+        return true;
+    }else{
+        if(a==1){
+            return false;
+        }else{
+            while(n>1){
+                if(a%n==0) {
+                    return false;
+                }else{
+                    n--;
+                };
+            };
+            return true;
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Primos relativos.}\\
+\hspace*{7mm}Dados dos naturales, determinar si son primos relativos.
+%
+\begin{description}
+\item[numericos.h :] Linea 7. \item[numericos.cpp :] Lineas 49-66.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PrimosRelativos: \mathbb{N}\times\mathbb{N} &\to \mathbb{B}\\
+(a,b) &\mapsto \begin{cases}
+\mathbb{T},& \forall n \in \left(\mathbb{Z^{+}}-\lbrace{1}\rbrace\right):\left\lbrace\frac{a}{n},\frac{b}{n}\right\rbrace \not\subset \mathbb{Z}\\
+\mathbb{F},& \exists n \in \left(\mathbb{Z^{+}}-\lbrace{1}\rbrace\right):\left\lbrace\frac{a}{n},\frac{b}{n}\right\rbrace \subset \mathbb{Z}\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool PrimosRelativos(int a, int b){
+    int n = a;
+    int m = b;
+    while(n>1&&m>1){
+        if((a%n==0&&b%n==0)||(a%m==0&&b%m==0)){
+            return false;
+        }else{
+            if(n>1){
+                n--;
+            }else{
+                if(m>1){
+                    m--;
+                };
+            };
+        };
+    };
+    return true;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Multiplo de la suma.}\\
+\hspace*{7mm}Determinar si un número es múltiplo de la suma de otros dos números.
+%
+\begin{description}
+\item[numericos.h :] Linea 8. \item[numericos.cpp :] Lineas 68-77.
+
+\item[Modelo Matemático:]
+\begin{align*}
+MultiploSuma: \mathbb{Z}\times\mathbb{Z}\times\mathbb{Z} &\to \mathbb{B}\\
+(a,b,c) &\mapsto \begin{cases}
+\mathbb{T},& \frac{a}{b+c}\in\mathbb{Z},\hspace*{2mm}b+c\neq 0\\
+\mathbb{F},& \frac{a}{b+c}\not\in\mathbb{Z},\hspace*{2mm}b+c\neq 0\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool MultiploSuma (int a, int b, int c){
+    if(b+c==0) {
+        return false;
+    }else{
+        if(a%(b+c)==0){
+            return true;
+        };
+        return false;
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Evaluación de un polinomio.}\\
+\hspace*{7mm}Dados los coeficientes de un polinomio de grado dos, evaluar el polinomio en un punto dado.
+%
+\begin{description}
+\item[numericos.h :] Linea 9. \item[numericos.cpp :] Lineas 79-81.
+
+\item[Modelo Matemático:]
+\begin{align*}
+EvaluarPolinomio: \mathbb{R}\times\mathbb{R}\times\mathbb{R}\times\mathbb{R} &\to \mathbb{R}\\
+(a,b,c,x) &\mapsto \begin{cases}
+ax^2+bx+c
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double EvaluarPolinomio (double a, double b, double c, double x){
+    return a*x*x+b*x+c;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{El coeficiente lineal de la derivada.}\\
+\hspace*{7mm}Dados los coeficientes de un polinomio de grado dos, calcular coeficiente lineal de la derivada.
+%
+\begin{description}
+\item[numericos.h :] Linea 10. \item[numericos.cpp :] Lineas 83-85.
+\item[Modelo Matemático:]
+\begin{align*}
+CoeficienteLineal: \mathbb{R}\times\mathbb{R}\times\mathbb{R} &\to \mathbb{R}\\
+(a,b,c) &\mapsto \begin{cases}
+2a
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double CoeficienteLineal (double a, double b, double c){
+    return 2*a;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{La derivada en un punto.}\\
+\hspace*{7mm}Dados los coeficientes de un polinomio de grado dos, calcular la derivada en un punto dado.
+%
+\begin{description}
+\item[numericos.h :] Linea 11. \item[numericos.cpp :] Lineas 87-89.
+
+\item[Modelo Matemático:]
+\begin{align*}
+Derivada: \mathbb{R}\times\mathbb{R}\times\mathbb{R}\times\mathbb{R} &\to \mathbb{R}\\
+(a,b,c,x) &\mapsto \begin{cases}
+2ax+b
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Derivada (double a, double b, double c, double x){
+    return 2*a*x+b;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{La Serie de Fibonacci.}\\
+\hspace*{7mm}Dado un natural, determinar si es un número de fibonacci o no.
+%
+\begin{description}
+\item[numericos.h :] Linea 12. \item[numericos.cpp :] Lineas 91-107.
+
+\item[Modelo Matemático:]
+Los números que conforman la sucesión de Fibonacci se definen como la suma de los dos anteriores en dicha sucesión de la siguiente manera:
+\begin{align*}
+F_{n} = \hspace*{2mm} &F_{n-1}+F_{n-2}\\
+&F_{1}=0\\
+&F_{2}=1
+\end{align*}
+Entonces:\\
+\begin{align*}
+Fibonacci: \mathbb{N} &\to \mathbb{B}\\
+(n) &\mapsto \begin{cases}
+\mathbb{T},& \exists x \in \mathbb{N}:F_x = n \\
+\mathbb{F},& \text{En otro caso}\\
+&F_1 = 0\\
+&F_2 = 1\\
+&F_x = F_{x-1}+F_{x-2}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool Fibonacci(int n){
+    if(n==1||n==0){
+        return true;
+    };
+    int x = 1;
+    int y = 1;
+    int z = 0;
+    for(int i =0;i<=n;i++){
+        z=x+y;
+        x=y;
+        y=z;
+        if(n==z){
+            return true;
+        };
+    };
+    return false;
+};
+
+
+
+
+
+
+
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\section{Geométricos.}
+
+\begin{problem} \emph{Rectas en el plano.}\\
+\hspace*{7mm}Dados la pendiente y el punto de corte de dos rectas, determinar si son paralelas, perpendiculares o ninguna de las anteriores.
+%
+\begin{description}
+\item[geometricos.h :] Linea 4. \item[geometricos.cpp :] Lineas 7-17.
+
+\item[Modelo Matemático:]
+%
+\begin{align*}
+Rectas: \mathbb{R}\times\mathbb{R}\times\mathbb{R}\times\mathbb{R} &\to \mathbb{ASCII}^{*}\\
+(m_{1},m_{2},b_{1},b_{2}) &\mapsto
+\begin{cases}
+Paralelas, &m_{1}=m_{2} \hspace*{2mm}\wedge\hspace*{2mm}b_{1} \neq b_{2}\\
+Perpenticulares, &-\frac{1}{m_{1}}=m_{2}\\
+Ninguna,& \text{En otro caso.}\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+char* Rectas(double m1, double m2, double b1, double b2){
+    if(m1==m2&&b1!=b2){
+        return "Paralelas";
+    }else{
+        if(m1*m2==-1){
+            return "Perpenticulares";
+        }else{
+            return "Ninguna";
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Intersección de dos rectas en el plano.}\\
+\hspace*{7mm}Dados la pendiente y el punto de corte de dos rectas, determinar el punto de intersección.
+%
+\begin{description}
+\item[geometricos.h :] Linea 5. \item[geometricos.cpp :] Lineas 19-24.
+
+\item[Modelo Matemático:]
+\begin{align*}
+Interseccion: \mathbb{R}\times\mathbb{R}\times\mathbb{R}\times\mathbb{R} &\to \mathbb{R}^{*}\\
+(m_{1},m_{2},b_{1},b_{2}) &\mapsto \begin{cases}
+\left(\frac{b_{2}-b_{1}}{m_{1}-m_{2}},m_{1}*\frac{b_{2}-b_{1}}{m_{1}-m_{2}}+b_{1}\right)
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* Corte(double m1, double m2, double b1, double b2){
+    double* r = new double [2];
+    r[0]=(b2-b1)/(m1-m2);
+    r[1]=m1*((b2-b1)/(m1-m2))+b1;
+    return r;
+};
+\end{verbatim}
+
+\item[Nota:]
+En los proximos ejercicios se usara la función raíz cuadrada y la función valor absoluto con los siguientes modelos matemáticos y codificaciones c++.\\
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Valor Absoluto.}\\
+\begin{description}
+\item[Reales.h :] Linea 6. \item[Reales.cpp :] Lineas 14-22.
+
+\item[Modelo Matemático:]
+\begin{align*}
+ValorAbsoluto: \mathbb{R} &\to \mathbb{R}\\
+(x) &\mapsto \begin{cases}
+x,&x\geq0\\
+-x,&x<0
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double ValorAbsoluto(double x){
+    if(x<0){
+        return -x;
+    }else{
+        if(x>=0){
+            return x;
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Raíz cuadrada de un número.}\\
+\begin{description}
+\item[Reales.h :] Linea 5. \item[Reales.cpp :] Lineas 4-12.
+
+\item[Modelo Matemático:]
+\begin{align*}
+Raiz2: \mathbb{R} &\to \mathbb{R}\\
+(x) &\mapsto \begin{cases}
+\sqrt{x}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Raiz2(double x){
+    double Xo;
+    double Xi = x;
+    do{
+        Xo = Xi;
+        Xi = 0.5 * (Xo + x / Xo);
+    }while(ValorAbsoluto(Xo - Xi) >= 1e-20);
+    return 0.5 * (Xi + x / Xi);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un triángulo Circunscrito a una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 6. \item[geometricos.cpp :] Lineas 26-28.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaTrianguloCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+3\sqrt{3}r^{2}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double AreaTrianguloCircuns (double r){
+    return 3*Raiz2(3)*Potencia(r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perímetro de un triángulo Circunscrito a una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 7. \item[geometricos.cpp :] Lineas 30-32.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroTrianguloCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+6\sqrt{3}r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double PerímetroTrianguloCircuns (double r){
+    return 6*Raiz2(3)*r;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un triángulo inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 8. \item[geometricos.cpp :] Lineas 34-36.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaTrianguloInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+\dfrac{3\sqrt{3}r^{2}}{4}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double AreaTrianguloInsc (double r){
+    return 3*Raiz2(3)/4*Potencia(r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perímetro de un triángulo inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 9. \item[geometricos.cpp :] Lineas 38-40.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroTrianguloInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+3\sqrt{3}r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double PerimetroTrianguloInsc (double r){
+    return r*Raiz2(3)*3;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un cuadrado circunscrito a una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 10. \item[geometricos.cpp :] Lineas 42-44.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaCuadradoCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+4r^{2}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double AreaCuadradoCircuns (double r){
+    return Potencia(2*r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perímetro de un cuadrado circunscrito a una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 11. \item[geometricos.cpp :] Lineas 46-48.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroCuadradoCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+8r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double PerimetroCuadradoCircuns (double r){
+    return 8*r;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un cuadrado inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 12. \item[geometricos.cpp :] Lineas 50-52.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaCuadradoInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+2r^{2}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double AreaCuadradoInsc (double r){
+    return 2*Potencia(r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perímetro de un cuadrado inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 13. \item[geometricos.cpp :] Lineas 54-56.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroCuadradoInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+4\sqrt{2}r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double PerimetroCuadradoInsc (double r){
+    return 4*Raiz2(2)*r;
+};
+\end{verbatim}
+\item[Nota:]
+En los proximos ejercicios se usaran las tres funciones trigonométricas básicas y la función factorial con los siguientes modelos matemáticos y codificaciones c++\\
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Factorial.}\\
+\begin{description}
+\item[Enteros.h :] Linea 4. \item[Enteros.cpp :] Lineas 3-9.
+\item[Modelos Matemáticos:]
+\begin{align*}
+Factorial: \mathbb{N} &\to \mathbb{N}\\
+(x) &\mapsto \begin{cases}
+x!
+\end{cases}
+\end{align*}
+\item[Codificación \textsf{C++}:]\hfill
+\begin{verbatim}
+int Factorial(int x){
+    if(x==0){
+        return 1;
+    }else{
+        return x*Factorial(x-1);
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Seno de un angulo en radianes.}\\
+\begin{description}
+\item[Reales.h :] Linea 7. \item[Reales.cpp :] Lineas 24-31.
+\item[Modelos Matemáticos:]
+\begin{align*}
+Seno: \mathbb{R} &\to \mathbb{R}\\
+(x) &\mapsto \begin{cases}
+\sum_{n=0}^\infty \dfrac{(-1)^{n}}{(2n+1)!}x^{2n+1}
+\end{cases}
+\end{align*}
+\item[Codificación \textsf{C++}:]\hfill
+\begin{verbatim}
+double Seno(double x){
+    double a =0;
+    for(int i=0;i=<12;i++){//Se toma 12 como valor finito.
+        a+=((Potencia(-1,i)*Potencia(x,2*i+1))/Factorial(2*i+1));
+    };
+    return a;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Coseno de un angulo en radianes.}\\
+\begin{description}
+\item[Reales.h :] Linea 8. \item[Reales.cpp :] Lineas 33-39.
+\item[Modelos Matemáticos:]
+\begin{align*}
+Coseno: \mathbb{R} &\to \mathbb{R}\\
+(x) &\mapsto \begin{cases}
+\sum_{n=0}^\infty \dfrac{(-1)^{n}}{(2n)!}x^{2n}
+\end{cases}
+\end{align*}
+\item[Codificación \textsf{C++}:]\hfill
+\begin{verbatim}
+double Coseno(double x){
+    double a =0;
+    for(int i=0;i=<12;i++){//Se toma 12 como valor finito.
+        a+=((Potencia(-1,i)*Potencia(x,2*i))/Factorial(2*i));
+    };
+    return a;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Tangente de un angulo en radianes.}\\
+\begin{description}
+\item[Reales.h :] Linea 9. \item[Reales.cpp :] Lineas 41-43.
+\item[Modelos Matemáticos:]
+\begin{align*}
+Tangente: \mathbb{R} &\to \mathbb{R}\\
+(x) &\mapsto \begin{cases}
+\dfrac{Seno(x)}{Coseno(x)}
+\end{cases}
+\end{align*}
+\item[Codificación \textsf{C++}:]\hfill
+\begin{verbatim}
+double Tangente(double x){
+    return ((Seno(x))/(Coseno(x)));
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un pentágono circunscrito a una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 14. \item[geometricos.cpp :] Lineas 58-60.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaPentagonoCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+5*Tangente(\frac{\pi}{5})*r^{2}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double const Pi = 3.14159265359;
+
+double AreaPentagonoCircuns(double r){
+    return 5*Tangente(Pi/5)*Potencia(r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perimetro de un pentágono circunscrito a una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 15. \item[geometricos.cpp :] Lineas 62-64.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroPentagonoCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+10*Tangente(\frac{\pi}{5})*r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double const Pi = 3.14159265359;
+
+double PerimetroPentagonoCircuns(double r){
+    return 10*Tangente(Pi/5)*r;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un pentágono inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 16. \item[geometricos.cpp :] Lineas 66-68.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaPentagonoInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+5*Seno(\frac{\pi}{5})*Coseno(\frac{\pi}{5})*r^2
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double const Pi = 3.14159265359;
+
+double AreaPentagonoInsc (double r){
+    return 5*Seno(Pi/5)*Coseno(Pi/5)*Potencia(r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perímetro de un pentágono inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 17. \item[geometricos.cpp :] Lineas 70-72.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroPentagonoInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+10*Seno(\frac{\pi}{5})*r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double const Pi = 3.14159265359;
+
+double PerimetroPentagonoInsc(double r){
+    return 10*Seno(Pi/5)*r;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un hexágono circunscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 18. \item[geometricos.cpp :] Lineas 74-76.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaHexagonoCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+6*Tangente(\frac{\pi}{6})*r^{2}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double const Pi = 3.14159265359;
+
+double AreaHexagonoCircuns(double r){
+    return 6*Tangente(Pi/6)*Potencia(r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perímetro de un hexágono circunscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 19. \item[geometricos.cpp :] Lineas 78-80.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroHexagonoCircuns: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+12*Tangente(\frac{\pi}{6})*r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double const Pi = 3.14159265359;
+
+double PerimetroHexagonoCircuns(double r){
+    return 12*Tangente(Pi/6)*r;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Área de un hexágono inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 20. \item[geometricos.cpp :] Lineas 82-84.
+
+\item[Modelo Matemático:]
+\begin{align*}
+AreaHexagonoInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+\dfrac{3\sqrt{3}}{2}r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double AreaHexagonoInsc(double r){
+    return 3*Raiz2(3)/2*Potencia(r,2);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Perímetro de un hexágono inscrito en una circunferencia.}\\
+\begin{description}
+\item[geometricos.h :] Linea 21. \item[geometricos.cpp :] Lineas 86-88.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PerimetroHexagonoInsc: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+6r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double PerimetroHexagonoInsc(double r){
+    return 6*r;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{La Telaraña.}\\
+\hspace*{7mm}Si una araña utiliza un patrón hexagonal para su telaraña, y cada hexágono está separado del otro por 1 cm, y la araña quiere hacer una telaraña de $\pi r^{2}$, ¿Qué cantidad de telaraña requiere la araña?
+\begin{description}
+\item[geometricos.h :] Linea 22. \item[geometricos.cpp :] Lineas 90-96.
+
+\item[Modelo Matemático:]
+\begin{align*}
+Telarana: \mathbb{R} &\to \mathbb{R}\\
+(r) &\mapsto \begin{cases}
+\sum_{i=1}^{\lfloor r \rfloor} 6i + 6r
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Telarana (double r){
+    double x = 6*r;
+    for(int i = 1;i<=(int)r;i++){
+        x+=6*i;
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\section{Otros.}
+
+\begin{problem} \emph{Las hojas de los árboles.}\\
+\hspace*{7mm}Si en la UN están podando árboles y cada rama tiene \emph{p} hojas, y a cada árbol le quitaron \emph{k} ramas, ¿Cuántos árboles se deben podar para obtener \emph{t} hojas?
+\begin{description}
+\item[otros.h :] Linea 4. \item[otros.cpp :] Lineas 4-14.
+
+\item[Modelo Matemático:]
+La relación entre árboles, ramas y hojas es directamente proporcional; para ello se establecen las siguientes variables:
+\begin{align*}
+p &\colonequals \text{Cantidad de hojas que tiene una rama.}\\
+k &\colonequals \text{Cantidad de ramas que tiene un árbol.}\\
+t &\colonequals \text{Cantidad de hojas en total.}
+\end{align*}
+Entonces:
+\begin{align*}
+Arbol: \mathbb{N}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{N}\\
+(k,p,t) &\mapsto \begin{cases}
+0,&t=0\vee p=0 \vee k=0\\
+\frac{t}{pk},&\frac{t}{pk}\in\mathbb{Z}\\
+\lfloor \frac{t}{pk}\rfloor +1,& \text{En otro caso}\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int Arbol(int k,int p,int t){
+    if(p==0||k==0||t==0){
+        return 0;
+    }else{
+        if((t%(p*k))==0){
+            return (int)(t/(p*k));
+        }else{
+            return ((int)(t/(p*k)))+1;
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Interes simple.}\\
+\hspace*{7mm}Si un amigo, no tan amigo, me presta \emph{k} pesos a \emph{i} pesos de interés diario, ¿Cuánto le pagaré en una semana si el interés es simple?
+\begin{description}
+\item[otros.h :] Linea 5. \item[otros.cpp :] Lineas 16-18.
+
+\item[Modelo Matemático:]
+En el interes simple el aumento se da de manera lineal.
+Entonces:
+\begin{align*}
+InteresSimple: \mathbb{R}\times\mathbb{R} &\to \mathbb{R}\\
+(k,i) &\mapsto \begin{cases}
+7i+k
+\end{cases}
+\end{align*}
+\\
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double InteresSimple(double k, double i){
+    return k+7*i;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Interes Compuesto.}\\
+\hspace*{7mm}Si un amigo, no tan amigo, me presta \emph{k} pesos a \emph{i} pesos de interés diario, ¿Cuánto le pagaré en una semana si el interés es compuesto?
+\begin{description}
+\item[otros.h :] Linea 6. \item[otros.cpp :] Lineas 20-22.
+
+\item[Modelo Matemático:]
+En el interes simple el aumento se da de manera exponencial.
+Entonces:
+\begin{align*}
+InteresCompuesto: \mathbb{R}\times\mathbb{R} &\to \mathbb{R}\\
+(k,i) &\mapsto \begin{cases}
+k+\left(1+\dfrac{i}{k}\right)^7
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double InteresCompuesto(double k, double i){
+    return k+Potencia(1+i/k,7);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Lego con fichas rojas y azules.}\\
+\hspace*{7mm}Un niño se la pasó jugando con fichas de lego, tenia dos tipos de fichas de lego, fichas de cuadros de 1x1 (rojas) y fichas azules de 2x1 (azules), y le dieron una base de 1xn cuadrito, ¿Cuántas formas diferentes puede construir con esa hilera?
+\begin{description}
+\item[otros.h :] Linea 7. \item[otros.cpp :] Lineas 24-31.
+
+\item[Modelo Matemático:]
+La cantidad de posibilidades de llenar una base de lego crecen siguiendo la serie de Fibonacci.
+Entonces:
+\begin{align*}
+Lego1: \mathbb{N} &\to \mathbb{N}\\
+(n) &\mapsto \begin{cases}
+Lego1(n-1)+Lego1(n-2),&n>1\\
+\hspace*{43mm}1,&n=0\\
+\hspace*{43mm}1,&n=1\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Lego1 (int n){
+    if(n==0||n==1){
+        return 1;
+    }else{
+        return Lego1(n-1)+Lego1(n-2);
+
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Lego con fichas rojas, azules y amarillas.}\\
+\hspace*{7mm}Un niño se la pasó jugando con fichas de lego, tenia tres tipos de fichas de lego, fichas de cuadros de 1x1 (rojas), fichas azules de 2x1 (azules)y fichas de cuadros 3x1 (amarillas) y le dieron una base de 1xn cuadrito, ¿Cuántas formas diferentes puede construir con esa hilera?
+\begin{description}
+\item[otros.h :] Linea 8. \item[otros.cpp :] Lineas 33-43.
+
+\item[Modelo Matemático:]
+Este modelo matemático se basa en una modificación de la sucesión de Fibonacci, en dicha sucesión el elemento $F_{n}$ es igual a la suma de los dos elementos anteriores, pero se modifica para tomar la suma de los tres anteriores, la nueva sucesión es denominada\emph{``Tribonacci"}, la serie seria representada de la siguiente forma:\\
+\begin{align*}
+T_{n} = \hspace*{2mm} &T_{n-1}+T_{n-2}+T_{n-3}\\
+&T_{0}=0\\
+&T_{1}=1\\
+&T_{2}=1
+\end{align*}
+\\Pero en este caso se modifica la sucesión con la suma de los tres anteriores, también llamada sucesión de \emph{``Tribonacci"}\\
+Entonces:
+\begin{align*}
+Lego2: \mathbb{N} &\to \mathbb{N}\\
+(n) &\mapsto
+\begin{cases}
+Lego2(n-1)+Lego2(n-2)+Lego2(n-3), &n>3\\
+\hspace*{68mm}1, &n=0\vee n=1\\
+\hspace*{68mm}2, &n=2\\
+\end{cases}
+\end{align*}
+%
+\\
+\\
+\\
+\\
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Lego2 (int n){
+    if(n==0||n==1){
+        return 1;
+    }else{
+        if(n==2){
+            return 2;
+        }else{
+            return Lego2(n-1)+Lego2(n-2)+Lego2(n-3);
+        };
+    };
+}; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\section{Problemas de Arreglos.}
+
+\begin{problem} \emph{Criba de Eratostenes.}\\
+\hspace*{7mm}Implementar la criba de Eratostenes para calcular los números primos en el rango $1$ a \emph{n}, donde \emph{n} es un número natural dado por el usuario.
+\begin{description}
+\item[probarreblos.h :] Linea 4. \item[probarreblos.cpp :] Lineas 7-30.
+
+\item[Modelo Matemático:]
+Para este problema se utilizan las funciones primosiguiente y contarprimos definidas mas adelante.\\
+Entonces:
+\begin{align*}
+CribaEratostenes: \mathbb{N} &\to \mathbb{N}^{*}\\
+(n) &\mapsto
+\begin{cases}
+\cup_x : x \in \mathbb{N}\wedge 1<x\leq n\wedge primo(x)
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int* CribaEratostenes (int n){
+    int* criba = new int[n+1];
+    criba[0]=0;
+    criba[1]=0;
+    for(int i=2;i<=n;i++){
+        criba[i]=1;
+    };
+    int x = 2;
+    while(x<=(int)(Raiz2((double)n))){
+        for(int i = 2;i*x<=n;i++){
+            criba[x*i]=0;
+        };
+        x=primosiguiente(x);
+    };
+    int* X = new int[contarprimos(criba,n+1)];
+    int c =0;
+    for(int i=2;i<=n;i++){
+        if(criba[i]==1){
+          X[c]=i;
+          c++;
+        };
+    };
+    return X;
+};
+
+
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Primo siguiente.}\\
+\begin{description}
+\item[probarreblos.h :] Linea 5. \item[probarreblos.cpp :] Lineas 32-40.
+
+\item[Modelo Matemático:]
+\begin{align*}
+primosiguiente: \mathbb{N} &\to \mathbb{N}\\
+(x) &\mapsto
+\begin{cases}
+ x+i,& primo(x+i);\forall_{i=1}^{\infty}\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int primosiguiente(int x){
+    x++;
+  while(true){
+    if(Primo(x)){
+        return x;
+    };
+    x++;
+  };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Contar Primos.}\\
+\begin{description}
+\item[probarreblos.h :] Linea 6. \item[probarreblos.cpp :] Lineas 42-48.
+
+\item[Modelo Matemático:]
+\begin{align*}
+contarprimos: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{N}\\
+(Z,n) &\mapsto
+\begin{cases}
+\sum_{i=1}^{n}Z_{i}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int contarprimos(int* Z,int n){
+    int x=0;
+    for(int i = 0; i<n;i++){
+        x+=Z[i];
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Suma de un arreglo(Enteros).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule la suma de los elementos de un arreglo de números enteros.
+\begin{description}
+\item[probarreblos.h :] Linea 7. \item[probarreblos.cpp :] Lineas 50-56.
+
+\item[Modelo Matemático:]
+\begin{align*}
+SumaArrEnteros: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(Z,n) &\mapsto
+\begin{cases}
+\sum_{i=1}^{n}Z_{i}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int SumaArrEnteros (int* Z,int n){
+    int x = 0;
+    for(int i=0;i<n;i++){
+        x+=Z[i];
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Suma de un arreglo(Reales).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule la suma de los elementos de un arreglo de números reales.
+\begin{description}
+\item[probarreblos.h :] Linea 8. \item[probarreblos.cpp :] Lineas 58-64.
+
+\item[Modelo Matemático:]
+\begin{align*}
+SumaArrReales: \mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(R,n) &\mapsto
+\begin{cases}
+\sum_{i=1}^{n}R_{i}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double SumaArrReales (double* R,int n){
+    double x = 0;
+    for(int i=0;i<n;i++){
+        x+=R[i];
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Promedio de los elementos un arreglo(Enteros).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el promedio de un arreglo de enteros.
+\begin{description}
+\item[probarreblos.h :] Linea 9. \item[probarreblos.cpp :] Lineas 66-68.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PromedioArrEnteros: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(Z,n) &\mapsto
+\begin{cases}
+\dfrac{SumaArrEnteros(Z,n)}{n}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double PromedioArrEnteros(int* Z,int n){
+    return SumaArrEnteros(Z,n)/n;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Promedio de los elementos un arreglo(Reales).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el promedio de un arreglo de reales.
+\begin{description}
+\item[probarreblos.h :] Linea 10. \item[probarreblos.cpp :] Lineas 70-72.
+
+\item[Modelo Matemático:]
+\begin{align*}
+PromedioArrReales: \mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(R,n) &\mapsto
+\begin{cases}
+\dfrac{SumaArrReales(R,n)}{n}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double PromedioArrReales(double* R,int n){
+    return SumaArrReales(R,n)/n;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Producto de dos arreglos (Enteros).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el producto de dos arreglos de números enteros de igual tamaño. Sean $v=(v_1,v_2,..., v_n)$ y $w=(w_1,w_2,..., w_n)$ dos arreglos, el producto de $v$ y $w$ (notado $v.w$) es el número: $v_1 * w_1 + v_2*w_2 +...+ v_n * w_n$
+\begin{description}
+\item[probarreblos.h :] Linea 11. \item[probarreblos.cpp :] Lineas 74-84.
+
+\item[Modelo Matemático:]
+\begin{align*}
+ProductoArrEnteros: \mathbb{Z}^{*}\times\mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(Z,S,n) &\mapsto
+\begin{cases}
+\sum_{i=1}^n Z_iS_i
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int ProductoArrEnteros(int* Z,int* S,int n){
+    int* Q= new int[n];
+    for(int i=0;i<n;i++){
+        Q[i]=S[i]*Z[i];
+    };
+    int x = 0;
+    for(int j=0;j<n;j++){
+        x +=Q[j];
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Producto de dos arreglos (Reales).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el producto de dos arreglos de números reales de igual tamaño. Sean $v=(v_1,v_2,..., v_n)$ y $w=(w_1,w_2,..., w_n)$ dos arreglos, el producto de $v$ y $w$ (notado $v.w$) es el número: $v_1 * w_1 + v_2*w_2 +...+ v_n * w_n$
+\begin{description}
+\item[probarreblos.h :] Linea 12. \item[probarreblos.cpp :] Lineas 86-96.
+
+\item[Modelo Matemático:]
+\begin{align*}
+ProductoArrReales: \mathbb{R}^{*}\times\mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(R,S,n) &\mapsto
+\begin{cases}
+\sum_{i=1}^n R_iS_i
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double ProductoArrReales(double* R,double* S,int n){
+    double* Q= new double[n];
+    for(int i=0;i<n;i++){
+        Q[i]=S[i]*R[i];
+    };
+    double x = 0;
+    for(int j = 0;j<n;j++){
+        x+=Q[j];
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Mínimo de un arreglo (Enteros).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el mínimo de un arreglo de números enteros.
+\begin{description}
+\item[probarreblos.h :] Linea 13. \item[probarreblos.cpp :] Lineas 96-106.
+
+\item[Modelo Matemático:]
+\begin{align*}
+MinimoArrEnteros: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(Z,n) &\mapsto
+\begin{cases}
+Z_i: Z_i \leq Z_a \forall_{a=1}^n 
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int MinimoArrEnteros(int* Z,int n){
+    int x = Z[0];
+    for(int i=1;i<n;i++){
+        if(Z[i]<x){
+            x = Z[i];
+        };
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Mínimo de un arreglo (Reales).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el mínimo de un arreglo de números reales.
+\begin{description}
+\item[probarreblos.h :] Linea 14. \item[probarreblos.cpp :] Lineas 108-116.
+
+\item[Modelo Matemático:]
+\begin{align*}
+MinimoArrReales: \mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(R,n) &\mapsto
+\begin{cases}
+R_i: R_i \leq R_a \forall_{a=1}^n 
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double MinimoArrReales(double* R,int n){
+    double x = R[0];
+    for(int i=1;i<n;i++){
+        if(R[i]<x){
+            x = R[i];
+        };
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Máximo de un arreglo (Enteros).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el máximo de un arreglo de números enteros. 
+\begin{description}
+\item[probarreblos.h :] Linea 15. \item[probarreblos.cpp :] Lineas 118-126.
+
+\item[Modelo Matemático:]
+\begin{align*}
+MaximoArrEnteros: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(Z,n) &\mapsto
+\begin{cases}
+Z_i: Z_i \geq Z_a \forall_{a=1}^n
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int MaximoArrEnteros(int* Z,int n){
+    int x = Z[0];
+    for(int i=1;i<n;i++){
+        if(Z[i]>x){
+            x = Z[i];
+        };
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Máximo de un arreglo (Reales).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el máximo de un arreglo de números reales. 
+\begin{description}
+\item[probarreblos.h :] Linea 16. \item[probarreblos.cpp :] Lineas 128-136.
+
+\item[Modelo Matemático:]
+\begin{align*}
+MaximoArrReales: \mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(R,n) &\mapsto
+\begin{cases}
+R_i: R_i \geq R_a \forall_{a=1}^n 
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double MaximoArrReales(double* R,int n){
+    double x = R[0];
+    for(int i=1;i<n;i++){
+        if(R[i]>x){
+            x = R[i];
+        };
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Producto dirécto de un arreglo (Enteros).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el producto directo de dos arreglos de enteros de igual tamaño. Sean $v=(v_1,v_2,..., v_n)$ y $w=(w_1,w_2,..., w_n)$ dos arreglos, el producto directo de $v$ y $w$ (notado $v*w$) es el vector: $[v_1 * w_1 , v_2*w_2 ,..., v_n * w_n]$
+\begin{description}
+\item[probarreblos.h :] Linea 17. \item[probarreblos.cpp :] Lineas 138-144.
+
+\item[Modelo Matemático:]
+\begin{align*}
+ProductoDArrEnteros: \mathbb{Z}^{*}\times\mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}^{*}\\
+(Z,S,n) &\mapsto
+\begin{cases}
+\cup_{x=1}^n Z_xS_x\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int* ProductoDArrEnteros(int* Z,int* S,int n){
+    int* Q= new int[n];
+    for(int i=0;i<n;i++){
+        Q[i]=S[i]*Z[i];
+    };
+    return Q;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Producto dirécto de un arreglo (Reales).}\\
+\hspace*{7mm}Desarrollar un algoritmo que calcule el producto directo de dos arreglos de reales de igual tamaño. Sean $v=(v_1,v_2,..., v_n)$ y $w=(w_1,w_2,..., w_n)$ dos arreglos, el producto directo de $v$ y $w$ (notado $v*w$) es el vector: $[v_1 * w_1 , v_2*w_2 ,..., v_n * w_n]$
+\begin{description}
+\item[probarreblos.h :] Linea 18. \item[probarreblos.cpp :] Lineas 146-152.
+
+\item[Modelo Matemático:]
+\begin{align*}
+ProductoDArrReales: \mathbb{R}^{*}\times\mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}^{*}\\
+(R,S,n) &\mapsto
+\begin{cases}
+\cup_{x=1}^n R_xS_x\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* ProductoDArrReales(double* R,double* S,int n){
+    double* Q= new double[n];
+    for(int i=0;i<n;i++){
+        Q[i]=S[i]*R[i];
+    };
+    return Q;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Mediana de un arreglo (Enteros).}\\
+\hspace*{7mm}Desarrollar un algoritmo que determine la mediana de un arreglo de enteros.  La mediana es el número que queda en la mitad del arreglo después de ser ordenado.
+\begin{description}
+\item[probarreblos.h :] Linea 19. \item[probarreblos.cpp :] Lineas 154-170.
+
+\item[Modelo Matemático:]
+\begin{align*}
+MedianaArrEnteros: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(Z,n) &\mapsto
+\begin{cases}
+Z_{\frac{n+1}{2}},& \dfrac{n}{2}\not\in \mathbb{Z}\\
+\dfrac{Z_{\frac{n}{2}}+Z_{\frac{n}{2}+1}}{2},& \text{En otro caso}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double MedianaArrEnteros(int* Z,int n){
+    int c;
+    for(int j = 0;j<n-1;j++){
+        for(int i = 0; i<n-1;i++){
+            if(Z[i]>Z[i+1]){
+                c=Z[i+1];
+                Z[i+1]=Z[i];
+                Z[i]=c;
+            };
+        };
+    };
+    if(n%2==0){
+        return (double)(Z[n/2]+Z[(n/2)-1])/2;
+    }else{
+        return (double) Z[(n-1)/2];
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Mediana de un arreglo (Reales).}\\
+\hspace*{7mm}Desarrollar un algoritmo que determine la mediana de un arreglo de reales.  La mediana es el número que queda en la mitad del arreglo después de ser ordenado.
+\begin{description}
+\item[probarreblos.h :] Linea 20. \item[probarreblos.cpp :] Lineas 172-188.
+
+\item[Modelo Matemático:]
+\begin{align*}
+MedianaArrReales: \mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}\\
+(R,n) &\mapsto
+\begin{cases}
+R_{\frac{n+1}{2}},& \dfrac{n}{2}\not\in \mathbb{Z}\\
+\dfrac{R_{\frac{n}{2}}+R_{\frac{n}{2}+1}}{2},& \text{En otro caso}
+\end{cases}
+\end{align*}
+\text{El arreglo \emph{R} debió ser anteriormente ordenado para que la función sirva.}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double MedianaArrReales(double* R,int n){
+    double c;
+    for(int j = 0;j<n-1;j++){
+        for(int i = 0; i<n-1;i++){
+            if(R[i]>R[i+1]){
+                c=R[i+1];
+                R[i+1]=R[i];
+                R[i]=c;
+            };
+        };
+    };
+    if(n%2==0){
+        return (R[n/2]+R[(n/2)-1])/2;
+    }else{
+        return  R[(n-1)/2];
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Ceros al final.}\\
+\hspace*{7mm}Hacer un algoritmo que deje al final de un arreglo de números todos los ceros que aparezcan en dicho arreglo.
+\begin{description}
+\item[probarreblos.h :] Linea 21. \item[probarreblos.cpp :] Lineas 190-205.
+
+\item[Modelo Matemático:]
+\begin{align*}
+CerosArr: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}^{*}\\
+(Z,n) &\mapsto
+\begin{cases}
+\left(\forall_{i=1}^n\left(\forall Z_i = 0\right)\right)  0 \leadsto Z_n  \wedge \forall_{j=i}^n   Z_{j+1} \leadsto Z_j
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int* CerosArr (int* Z, int n){
+    for(int k = 0;k<n;k++){
+        for(int i = 0;i<n;i++){
+            if(Z[i]==0){
+                for(int j = i;j<n;j++){
+                    if(j==n-1){
+                        Z[j]=0;
+                    }else{
+                        Z[j]= Z[j+1];
+                    };
+                };
+            };
+        };
+    };
+        return Z;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+%
+
+\begin{problem} \emph{De binario a decimal.}\\
+\hspace*{7mm}Suponga que un arreglo de enteros esta lleno de unos y ceros y que el arreglo representa un número binario al revés. Hacer un algoritmo que calcule los números en decimal que representa dicho arreglo de unos y ceros.
+\begin{description}
+\item[probarreblos.h :] Linea 22. \item[probarreblos.cpp :] Lineas 207-213.
+
+\item[Modelo Matemático:]
+\begin{align*}
+BinarioDecimalArr: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(Z,n) &\mapsto
+\begin{cases}
+\sum_{i=1}^{n} Z_{i}*2^{i}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int BinarioDecimalArr(int* Z, int n){
+    int x = 0;
+    for(int i = 0; i<n; i++){
+        x = x+Z[i]*Potencia(2,i);
+    };
+    return x;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{De decimal a binario.}\\
+\hspace*{7mm}Hacer un algoritmo que dado un número entero no negativo, cree un arreglo de unos y ceros que representa el número en binario al revés.
+\begin{description}
+\item[probarreblos.h :] Linea 23. \item[probarreblos.cpp :] Lineas 215-232.
+
+\item[Modelo Matemático:]
+\begin{align*}
+DecimalBinarioArr: \mathbb{Z} &\to \mathbb{Z}^{*}\\
+(x) &\mapsto
+\begin{cases}
+\cup a : \forall_{n}^{n=1} \left(\frac{n}{2}+a=x; \frac{n}{2}= n\right), n\in \mathbb{N}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int* DecimalBinarioArr(int x){
+    int a = x;
+    int n = 0;
+    while(a>1){
+        a/=2;
+        n++;
+    };
+    if(a==1){
+        n++;
+    }
+    int* numero = new int[n];
+    a=x;
+    for(int i = 0; i<n;i++){
+        numero[i]=a%2;
+        a/=2;
+    };
+    return numero;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Máximo común divisor.}\\
+\hspace*{7mm}Hacer un algoritmo que calcule el máximo común divisor para un arreglo de enteros positivos.
+\begin{description}
+\item[probarreblos.h :] Linea 24. \item[probarreblos.cpp :] Lineas 234-250.
+
+\item[Modelo Matemático:]
+\begin{align*}
+mcd: \mathbb{N}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(Z,n) &\mapsto
+\begin{cases}
+x:\forall_{i=0}^{n} \frac{Z_{i}}{x}\in \mathbb{N}\\
+\text{$x$ es el mayor número natural que cumple la condición.}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int mcd(int* Z, int n){
+    int c = MaximoArrEnteros(Z,n);
+    int p = 0;
+    while (c>0){
+        for(int i =0;i<n;i++){
+            if(Z[i]%c==0){
+                p++;
+            };
+        };
+        if(p==n){
+            return c;
+        }else{
+            c--;
+            p=0;
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Minimo común múltiplo.}\\
+\hspace*{7mm}Hacer un algoritmo que calcule el mínimo común multiplo para un arreglo de enteros positivos.
+\begin{description}
+\item[probarreblos.h :] Linea 25. \item[probarreblos.cpp :] Lineas 252-268.
+
+\item[Modelo Matemático:]
+\begin{align*}
+mcm: \mathbb{N}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(Z,n) &\mapsto
+\begin{cases}
+x:\forall_{i=0}^{n} \frac{x}{Z_{i}}\in \mathbb{N}\\
+\text{$x$ es el menor número natural que cumple la condición.}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int mcm(int* Z, int n){
+    int c = MinimoArrEnteros(Z,n);
+    int p = 0;
+    while (true){
+        for(int i =0;i<n;i++){
+            if(c%Z[i]==0){
+                p++;
+            };
+        };
+        if(p==n){
+            return c;
+        }else{
+            c++;
+            p=0;
+        };
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\section{Conjuntos como arreglos}
+\begin{problem}\emph{Solicitar al usuario dos conjuntos de números enteros}\\
+Solicitar al usuario el tamaño de dos conjuntos con sus respectivos elementos en número enteros. Asimismo, cada uno de estos conjuntos no contendrán elementos repetidos.
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+repetido: \mathbb{Z}^*\times\mathbb{Z}&\to \mathbb{B}\\
+(A^*,c) &\mapsto
+\begin{cases}
+Verdadero, &\text{si }\ \exists_{i=0}^{c-1}(A_i=A_{i+1})\\
+Falso, &\text{en otro caso}.\\
+\end{cases}
+\end{align*}
+%
+\begin{align*}
+ordenarE: \mathbb{Z}^*\times\mathbb{N}&\to \varnothing
+\\
+(A^*,n) &\mapsto
+A^*=A_0,A_1,...,A_{n-1};\ \forall_{i=0}^{n-1}(A_i \leq A_{i+1})
+\end{align*}
+%
+\begin{align*}
+crearC1: \mathbb{Z}\to \mathbb{Z}^*\\
+(n) &\mapsto A^*,\  \forall_{i=0}^{n-1} (repetido(A,c)=Falso \ \land \ A_i \leq A_{i+1})
+\end{align*}
+%
+\begin{align*}
+crearC2: \mathbb{Z}\to \mathbb{Z}^*\\
+(n) &\mapsto B^*,\  \forall_{i=0}^{n-1} (repetido(B,c)=Falso \ \land \ B_i \leq B_{i+1})
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+\begin{verbatim}
+bool repetido(int* A, int c){
+    for(int i = 0; i < c; i++){
+        for(int j = 0; j < c; j++){
+            if(A[i] == A[j] && i != j){
+                return true;
+            };
+        };
+    };
+    return false;
+};
+
+void ordenarE(int* A,int n){
+  for(int i = 0; i < n; i++){
+    for(int j = i + 1; j < n; j++){
+        if(A[j] < A[i]){
+            int a = A[i];
+            A[i] = A[j];
+            A[j] = a;
+        };
+    };
+  };
+};
+
+int* crearC1(int n){
+    int c = 1;
+    int* A = new int[n];
+    for(int i = 0; i < n; i++, c++){
+        do{
+            cout << "Ingrese un numero para el primer conjunto: ";
+            cin >> A[i];
+        }while(repetido(A,c));
+    };
+    ordenarE(A,n);
+    return A;
+};
+
+int* crearC2(int n){
+    int c = 1;
+    int* B = new int[n];
+    for(int i = 0; i < n; i++, c++){
+        do{
+            cout << "Ingrese un numero para el segundo conjunto: ";
+            cin >> B[i];
+        }while(repetido(B,c));
+    };
+    ordenarE(B,n);
+    return B;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem}\emph{Unión de conjuntos}\\
+Recibe los dos conjuntos creados por el usuario y los une.
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+pegarC: \mathbb{Z}^*\times\mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{Z}^*\\
+(A^*,B^*,n,m) &\mapsto C^*,\ \text{tal que} \ C^* = A^* + B^* \\ & 
+\hspace{1cm} \land \ \forall_{i=0}^{n+m-1}(C_i \leq C_{i+1})
+\end{align*}
+%
+\begin{align*}
+nuevolimiteU: \mathbb{Z}^*\times\mathbb{Z}&\to \mathbb{Z}\\
+(A^*,n) &\mapsto c,\ \forall_{i=0}^{n-1}(A_i \neq A_{i+1})
+\end{align*}
+%
+\begin{align*}
+unionA: \mathbb{Z}^*\times\mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{Z}^*\\
+(A^*,B^*,n,m) &\mapsto D^*,\ \forall_{i=0}^{d-1}((D_i \in A^* \lor D_i \in B^*)\ \land \ D_i < D_{i+1})
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int* pegarC(int* A, int* B, int n, int m){
+    int* C = new int[n + m];
+    for(int i = 0; i < n; i++){
+        C[i] = A[i];
+    };
+    for(int i = n, j = 0; i < m || j < m; i++, j++){
+        C[i] = B[j];
+    };
+    ordenarE(C,n + m);
+    return C;
+};
+int nuevolimiteU(int* A, int n){
+    int c = n;
+    for(int i = 0; i < n; i++){
+      if(A[i] == A[i + 1]){
+        c--;
+      };
+    };
+    return c;
+};
+int* unionA(int* A, int* B, int n, int m){
+    int* C = pegarC(A,B,n,m);
+    int d = nuevolimiteU(C,n + m);
+    int* D = new int[d];
+    for(int i = 0, j = 0; i < n + m || j < d; i++){
+        if(C[i] != C[i + 1]){
+            D[j] = C[i];
+            j++;
+        };
+    };
+    delete[] C;
+    return D;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Intersección de conjuntos}\\
+Recibe los dos conjuntos creados por el usuario y los intersecta.
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+nuevolimiteI: \mathbb{Z}^*\times\mathbb{Z}&\to \mathbb{Z}\\
+(A^*,n) &\mapsto c,\ \forall_{i=0}^{n-1}(A_i=A_{i+1})
+\end{align*}
+%
+\begin{align*}
+interseccionA: \mathbb{Z}^*\times\mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{Z}^*\\
+(A^*,B^*,n,m) &\mapsto D^*,\ \forall_{i=0}^{d-1}(D_i \in A^* \land D_i \in B^*)
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int nuevolimiteI(int* A, int n){
+    int c = 0;
+    for(int i = 0; i < n; i++){
+        if(A[i] == A[i + 1]){
+            c++;
+        };
+    };
+    return c;
+};
+
+int* interseccionA(int* A, int* B, int n, int m){
+    int* C = pegarC(A,B,n,m);
+    int d = nuevolimiteI(C,n + m);
+    int* D = new int[d];
+    for(int i = 0, j = 0; i < n + m || j < d; i++){
+        if(C[i] == C[i + 1]){
+            D[j] = C[i];
+            j++;
+        };
+    };
+    delete[] C;
+    return D;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem}\emph{Diferencia de conjuntos}\\
+Recibe los dos conjuntos creados por el usuario y calcula la diferencia del primer conjunto con respecto al segundo conjunto.
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+nuevolimiteD: \mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{Z}\\
+(A^*,n,m) &\mapsto c,\ \forall_{i=0}^{n-1}(A_i \neq A_{i+1})
+\end{align*}
+%
+\begin{align*}
+noperteneceAB: \mathbb{Z}^*\times\mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{B}^*\\
+(A^*,B^*,n,m)\mapsto C^*,\ \forall_{i=0}^{n-1}&(C_i = Verdadero\ \lor \ C_i = Falso)
+\end{align*}
+%
+\begin{align*}
+diferenciaA: \mathbb{Z}^*\times\mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{Z}^*\\
+(A^*,B^*,n,m)\mapsto D^*,\ \forall_{i=0}^{n-1}&(noperteneceAB(A,B,n,m)_i=Verdadero)
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int nuevolimiteD(int* A, int n, int m){
+    int c = m;
+    for(int i = 0; i < n; i++){
+        if(A[i] == A[i+1]){
+          c--;
+        };
+    };
+    return c;
+};
+bool* noperteneceAB(int* A, int* B, int n, int m){
+    bool* C = new bool[n];
+    for(int i = 0; i < n; i++){
+        C[i] = true;
+    };
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < m; j++){
+            if(A[i] == B[j]){
+                C[i] = false;
+            };
+        };
+    };
+    return C;
+};
+int* diferenciaA(int* A, int* B, int n, int m){
+    int* C = pegarC(A,B,n,m);
+    int d = nuevolimiteD(C,n+m,n);
+    int* D = new int[d];
+    for(int i = 0, j = 0; i < n || j < d; i++){
+        if(noperteneceAB(A,B,n,m)[i]){
+            D[j] = A[i];
+            j++;
+        };
+    };
+    delete[] C;
+    return D;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem}\emph{Diferencia simétrica de conjuntos}\\
+Recibe los dos conjuntos creados por el usuario y calcula la diferencia simétrica de los mismos.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+nuevolimiteDS: \mathbb{Z}^*\times\mathbb{Z}&\to \mathbb{Z}\\
+(C^*,n) &\mapsto c,\ \forall_{i=0}^{n-1}(C_i \neq C_{i+1})
+\end{align*}
+%
+\begin{align*}
+simetricaA: \mathbb{Z}^*\times\mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{Z}^*\\
+(A^*,B^*,n,m) &\mapsto D^*,\ \text{tal que}\ D^* = \ A^* \cup B^* \setminus A^* \cap B^*
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int nuevolimiteDS(int* C, int n){
+    int c = n;
+    for(int i = 0; i < n; i++){
+        if(C[i] == C[i + 1]){
+            c -= 2;
+        };
+    };
+    return c;
+};
+
+int* simetricaA(int* A, int* B, int n, int m){
+    int* C = pegarC(A,B,n,m);
+    int d = nuevolimiteDS(C,n + m);
+    int* D = new int[d];
+    for(int i = 0, j = 0; i < n + m || j < d; i++){
+        if(C[i] == C[i + 1]){
+            i++;
+        }else{
+            D[j] = C[i];
+            j++;
+        };
+    };
+    delete[] C;
+    return D;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem}\emph{Determinar si un elemento pertenece a algún conjunto}\\
+Recibe los dos conjuntos y un elemento adicional suministrados por el usuario y determina si dicho elemento pertenece a alguno de los dos conjuntos.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+perteneceA: \mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{B}\\
+(A^*,n,x) &\mapsto
+\begin{cases}
+Verdadero, &\text{si }\ \exists_{i=0}^{n-1}(A_i=x)\\
+Falso, &\text{en otro caso}.\\
+\end{cases}
+\end{align*}
+%
+\begin{align*}
+perteneceB: \mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{B}\\
+(B^*,m,x) &\mapsto
+\begin{cases}
+Verdadero, &\text{si }\ \exists_{i=0}^{m-1}(B_i=x)\\
+Falso, &\text{en otro caso}.\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool perteneceA(int* A, int n, int x){
+    ordenarE(A,n);
+    for(int i = 0; i < n; i++){
+        if(A[i] == x){
+            return true;
+        };
+    };
+    return false;
+};
+
+bool perteneceB(int* B, int m, int x){
+    ordenarE(B,m);
+    for(int i = 0; i < m; i++){
+        if(B[i] == x){
+            return true;
+        };
+    };
+    return false;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem}\emph{Determinar si el primer conjunto está contenido en el segundo conjunto}\\
+Recibe los dos conjuntos creados por el usuario y determina si el primer conjunto está contenido en el segundo conjunto.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+contenidoA: \mathbb{Z}^*\times\mathbb{Z}^*\times\mathbb{Z}\times\mathbb{Z}&\to \mathbb{B}\\
+(A^*,B^*,n,m) &\mapsto
+\begin{cases}
+Verdadero, &\text{si}\mid \forall_{i=0}^{c-1} (C_i = C_{i+1}) \mid=\mid A^* \mid \\
+Falso, &\text{en otro caso}.\\
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool contenidoA(int* A, int* B, int n, int m){
+    int* C = pegarC(A,B,n,m);
+    int c = n + m;
+    int d = 0;
+    for(int i = 0; i < c; i++){
+        if(C[i] == C[i + 1]){
+            d++;
+        };
+    };
+    return d == n;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\section{Polinomios como arreglos}
+\begin{problem} \emph{Evaluar un punto en dos polinomios}\\
+Lee un real e imprime la evaluación de los dos polinomios en dicho dato.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+f: \mathbb{R}^*\times\mathbb{N}\times\mathbb{R}&\to \mathbb{R}\\
+(A^*,n,R) &\mapsto v\ =\ A_n b^n + A_{n-1} b^{n-1} + ... + A_1 b^1 + A_0 b^0
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double Xevaluado(double* A,int a,double R){
+    double v=0;
+    for(int j=a;j>=0;j--){
+        v+=A[j]*potenciaot(R,j);
+    };
+    return v;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Sumar dos polinomios}\\
+Calcula el polinomio suma y lo imprime.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+f: \mathbb{R}^*\times\mathbb{N}\times\mathbb{R}^*\times\mathbb{N}&\to \mathbb{R}\\
+(A^*,n,B^*,m) &\mapsto \ (A_n+B_n) x^n + (A_{n-1}+B_{n-1}) x^{n-1} + ... \\& \hspace{1cm} + (A_1+ B_1) x^1 + (A_0+B_0) x^0
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* SumarPolinomios(double* A,int a,double* B,int b){
+    int x=valorabsoluto(a-b);
+    double* nuevo=new double[mayor(a,b)+1];
+    for(int i=menor(a,b)+1;i<=mayor(a,b);i++){ 
+        if(a>b){
+            nuevo[i]=A[i];
+        }else if(b>a){
+       	    nuevo[i]=B[i];
+	    };
+	};
+	for(int i=0;i<=menor(a,b);i++){
+       nuevo[i]=A[i]+B[i];
+	};
+    return nuevo;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Restar dos polinomios}\\
+Calcula el polinomio resta y lo imprime.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+f: \mathbb{R}^*\times\mathbb{R}&\to \mathbb{R}\\
+(A^*,b) &\mapsto a\ =\ (A_n-B_n) x^n + (A_{n-1}-B_{n-1}) x^{n-1} + ... \\& \hspace{1cm}+ (A_1-B_1) x^1 + (A_0-B_0) x^0
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* RestaPolinomios(double* A,int a,double* B,int b){
+    int x=valorabsoluto(a-b);
+    double* nuevo=new double[mayor(a,b)+1];
+    for(int i=menor(a,b)+1;i<=mayor(a,b);i++){
+       if(a>b){
+       	 nuevo[i]=A[i];
+	   }else if(b>a){
+	   	 nuevo[i]=B[i];
+	   };
+	};
+	for(int i=0;i<=menor(a,b);i++){
+       nuevo[i]=A[i]-B[i];
+	};
+    return nuevo;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Multiplicar dos polinomios}\\
+Calcula el polinomio multiplicación y lo imprime.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+f: \mathbb{R}^*\times\mathbb{R}&\to \mathbb{R}\\
+(A^*,b) &\mapsto a\ =\ (A_n-B_n) x^n + (A_{n-1}-B_{n-1}) x^{n-1} + ... \\& \hspace{1cm}+ (A_1-B_1) x^1 + (A_0-B_0) x^0
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* Multipolinomios(double* A,int a,double* B,int b){
+    int ext=a+b; 
+    double* nuevo=new double[ext+1];
+    for(int i=0;i<=ext;i++){
+        nuevo[i]=0;
+    };
+    for(int j=0;j<=a;j++){
+        for(int k=0;k<=b;k++){
+            nuevo[j+k]+=A[j]*B[k];
+        };
+    };
+    return nuevo;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Dividir dos polinomios}\\
+Calcula el polinomio división y lo imprime.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+f: \mathbb{R}^*\times\mathbb{R}&\to \mathbb{R}\\
+(A^*,a,B*,b) &\mapsto a\ =\ (A_n-B_n) x^n + (A_{n-1}-B_{n-1}) x^{n-1} + ... \\& \hspace{1cm}+ (A_1-B_1) x^1 + (A_0-B_0) x^0
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* dividir_pol(double* A,int a,double* B,int b){
+        int n=a-b;
+        double* X=new double[n+1];
+        for(int i=0;i<=n;i++){
+            double* K=creararreglo(a-i+1);
+            X[n-i]=A[a-i]/B[b];
+            K=multicoexdiv(B,b,a-i,X[n-i]);
+            A=SumarPolinomios(A,a-i,K,a-i);
+        };
+        return X;
+};
+double* creararreglo(int a){
+    double* x=new double[a];
+    return x;
+};
+double* cerosenarreglo(double* A,int n){
+    for(int i=0;i<n;i++){
+        A[i]=0;
+    };
+    return A;
+};
+double* multicoexdiv(double* B, int b,int a,double n){
+    double* pro=new double[a+1];
+    pro=cerosenarreglo(pro,a+1);
+    for(int i=b;i>=0;i--){
+        pro[a]=B[i]*(-n);
+        a--;
+    };
+    return pro;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Residuo de dos polinomios}\\
+Calcula el polinomio residuo y lo imprime.
+%
+\begin{description}
+\item[Modelo Matemático:]
+%
+\begin{align*}
+f: \mathbb{R}^*\times\mathbb{R}&\to \mathbb{R}\\
+(A^*,b) &\mapsto a\ =\ (A_n-B_n) x^n + (A_{n-1}-B_{n-1}) x^{n-1} + ... \\& \hspace{1cm}+ (A_1-B_1) x^1 + (A_0-B_0) x^0
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* residuo_pol(double* A,int a,double* B,int b){
+    int n=a-b;
+    double* X=new double[n+1];
+    for(int i=0;i<=n;i++){
+        double* K=creararreglo(a-i+1);
+        X[n-i]=A[a-i]/B[b];
+        K=multicoexdiv(B,b,a-i,X[n-i]);
+        A=SumarPolinomios(A,a-i,K,a-i);
+    };
+    return A;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\section{Problemas de matrices.}
+
+\begin{problem} \emph{Creación de matrices}\\
+Desarrollar un algoritmo que permita crear una matríz, ya sea de reales o enteros.
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+CrearMatrizInt: \mathbb{N}\times\mathbb{N} &\to \mathbb{Z**}\\
+(n,m) &\mapsto
+A_{nm}
+\end{align*}
+\begin{align*}
+CrearMatrizDouble: \mathbb{N}\times\mathbb{N} &\to \mathbb{R**}\\
+(n,m) &\mapsto
+A_{nm}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** crear_matriz_int(int n, int m){
+    int** X = new int*[n];
+    for(int i = 0; i < n; i++){
+        X[i] = new int[m];
+    };
+return X;
+};
+double** crear_matriz_double(int n, int m){
+    double** X = new double*[n];
+    for(int i = 0; i < n; i++){
+        X[i] = new double[m];
+    };
+return X;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Sumar dos matrices}\\
+Desarrollar un algoritmo que permita sumar dos matrices de números reales y enteros.
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+mcd: \mathbb{N}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(A^{**},B^{**},n,m) &\mapsto
+(A_{nm}+B_{nm})+(A_{nm-1}+B_{nm-1})+...+A_{nm}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** crear_matriz_int(int n, int m){
+    int** X = new int*[n];
+    for(int i = 0; i < n; i++){
+        X[i] = new int[m];
+    };
+return X;
+};
+double** crear_matriz_double(int n, int m){
+    double** X = new double*[n];
+    for(int i = 0; i < n; i++){
+        X[i] = new double[m];
+    };
+return X;
+};
+int** SumarMatrices(int** A,int** B,int f,int c){
+    int** total=crear_matriz_int(f,c);
+    for(int i=0;i<f;i++){
+        for(int j=0;j<c;j++){
+            total[i][j]=A[i][j]+B[i][j];
+        };
+    };
+    return total;
+};
+double** SumarMatricesR(double** A,double** B,int f,int c){
+    double** total=crear_matriz_double(f,c);
+    for(int i=0;i<f;i++){
+        for(int j=0;j<c;j++){
+            total[i][j]=A[i][j]+B[i][j];
+        };
+    };
+    return total;
+};
+
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Multiplicar dos matrices}\\
+Desarrollar un algoritmo que permita multiplicar dos matrices de números reales y enteros.
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+mcd: \mathbb{N}^{*}\times\mathbb{N} &\to \mathbb{Z}\\
+(A^{**},B^{**},n,m) &\mapsto
+(A_{nm}+B_{nm})+(A_{nm-1}+B_{nm-1})+...+A
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** MultiMatricesE(int** A,int** B,int f,int c){
+    int** total=crear_matriz_int(f,c);
+    for(int i=0;i<f;i++){
+        for(int j=0;j<c;j++){
+            total[i][j]=A[i][j]*B[i][j];
+        };
+    };
+    return total;
+};
+double** MultiMatricesR(double** A,double** B,int f,int c){
+    double** total=crear_matriz_double(f,c);
+    for(int i=0;i<f;i++){
+        for(int j=0;j<c;j++){
+            total[i][j]=A[i][j]*B[i][j];
+        };
+    };
+    return total;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+\begin{problem} \emph{Sumar columnas de una matríz}\\
+Desarrollar un programa que sume los elementos de una columna dada de una matriz.
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+mcd: \mathbb{Z}^{*}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{Z}^*\\
+(X^{**},n,m) &\mapsto
+\begin{bmatrix}
+X_{0,1} & X_{0,2} & ... & X_{0,n} \\
++ & + & ... & +\\
+X_{1,1} & X_{1,2} & ... & X_{1,n}\\
++ & + & ... & +\\
+X_{2,1} & X_{2,2} & ... & X_{2,n} \\
+\parallel & \parallel & ... & \parallel\\
+A_{0} & A_{1} & ... & A_{n-1} 
+\end{bmatrix}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int* SumarColumnas(int**A,int f,int c){
+    int* total=new int[c];
+    for(int i=0;i<c;i++){
+            total[i]=0;
+    };
+    for(int i=0;i<c;i++){
+        for(int j=0;j<f;j++){
+            total[i]+=A[j][i];
+        };
+    };
+    return total;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Sumar filas de una matríz}\\
+Desarrollar un programa que sume los elementos de una fila dada de una matriz.
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+sumarFilas: \mathbb{Z}^{*}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{Z}^*\\
+(X^{**},n,m) &\mapsto
+\begin{bmatrix}
+X_{0,1}\ + \ & X_{0,2}\ + \ & ... & \ + \ X_{0,n} = A_{0}\\
+X_{1,1}\ + \ & X_{1,2}\ + \ & ... & \ + \ X_{1,n} = A_{1}\\
+...\  \ & ...\   & ... &  \ ... \ \ \ \ \ \ \ \ \ \ ...\\
+X_{m,1}\ + \ & X_{m,2}\ + \ & ... & \ + \ X_{m,n} = A_{m} \\
+\end{bmatrix}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int* SumarFilas(int**A,int f,int c){
+    int* total = new int[f];
+    for(int i = 0; i < f; i++){
+            total[i] = 0;
+    };
+    for(int i = 0; i < f; i++){
+        for(int j = 0; j < c; j++){
+            total[i] += A[i][j];
+        };
+    };
+    return total;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Cuadrado mágico}\\
+Desarrollar un algoritmo que determine si una matriz es mágica. Se dice que una matriz cuadrada es mágica si la suma de cada una de sus filas, de cada una de sus columnas y de cada diagonal es igual. 
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+CuadradoMagico: \mathbb{Z}^{**}\times\mathbb{N}&\to \mathbb{B}\\
+(A^{**},n) &\mapsto 
+\begin{cases}
+Verdadero, & d1=d2\land perteneceA(F,n,d1);\\
+Falso, &\text{en otro caso }. 
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+bool CuadradoMagico(int**A, int n){
+    int* F = new int[n];
+    int* C = new int[n];
+    int d1 = 0;
+    int d2 = 0;
+    for(int i = 0; i < n; i++){
+        F[i] = 0;
+    };
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            F[i] += A[i][j];
+        };
+    };
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            if(F[i] != F[j]){
+                return false;
+            };
+        };
+    };
+    for(int i = 0; i < n; i++){
+        C[i] = 0;
+    };
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            C[i] += A[j][i];
+        };
+    };
+    for(int i = 0; i < n; i++){
+        for(int j = 0; j < n; j++){
+            if(C[i] != C[j]){
+                return false;
+            };
+        };
+    };
+    for(int i = 0; i < n; i++){
+        if(F[i] != C[i]){
+            return false;
+        };
+    };
+    for(int i = 0; i < n; i++){
+        d1 += A[i][i];
+    };
+    for(int i = n - 1, j = 0; i >= 0 && j < n; i--, j++){
+        d2 += A[i][j];
+    };
+    return d1 == d2 && perteneceA(F,n,d1);
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Reemplazar por unos y ceros la matriz}\\
+Desarrollar un algoritmo que dado un entero, reemplace en una matriz todos los números mayores a un número dado por un uno y todos los menores o iguales por un cero.
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+ReemplazarM: \mathbb{Z}^{**}\times\mathbb{N}\times\mathbb{N}\times\mathbb{Z}&\to \mathbb{Z}^{**}\\
+(A^{**},n,m,x) \mapsto & A^{**}, \forall_{i=0}^{n-1}\forall_{j=0}^{m-1}(A_{i,j} > x \mapsto 1 \land A_{i,j} \leq x \mapsto 0)
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** ReemplazarM(int** A, int filas, int columnas, int x){
+    for(int i = 0; i < filas; i++){
+        for(int j = 0; j < columnas; j++){
+            if(A[i][j] > x){
+                A[i][j] = 1;
+            }else{
+                A[i][j] = 0;
+            };
+        };
+    };
+    return A;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Derterminante de una matriz}\\
+\hspace*{7mm}Desarrollar un programa que calcule el determinante de una matríz cuadrada.
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+DeterminanteMatriz: \mathbb{Z}^{**}\times\mathbb{N} &\to \mathbb{Z}\\
+(X,n) &\mapsto
+\begin{cases}
+X_1,&n=1\\
+X_{1,1} X_{2,2} - X_{1,2} X_{2,1},&n=2\\
+\sum_{i=1}^n X_{1,i}*{-1}^{i+1}*DeterminanteMatriz(Adjunta(X,i,n-1)),& n>2
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int DeterminanteMatriz(int** X,int n){
+    if(n==2){
+        return X[0][0]*X[1][1]-(X[1][0]*X[0][1]);
+    }else{
+        int a=0;
+        for(int i =0;i<n;i++){
+            a+=X[0][i]*Potencia(-1,i)*DeterminanteMatriz(Adjunta(X,i,n-1),n-1);
+        };
+        return a;
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Matriz Corrida verticalmente }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+MatrizCorrida: \mathbb{Z}^{**}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{Z}^{**}\\
+(X,f,n) &\mapsto
+\begin{cases}
+\begin{bmatrix}
+X_{f,1} & X_{f,2} & X_{f,3} & X_{f,4} & ...& X_{f,n} \\
+X_{f+1,1} & X_{f+1,2} & X_{f+1,3} & X_{f+1,4} & ...& X_{f+1,n} \\
+X_{f+2,1} & X_{f+2,2} & X_{f+2,3} & X_{f+2,4} & ...& X_{f+2,n} \\
+... & ... & ... & ...& ... & ...\\
+X_{f-1,2} & X_{f-1,3} & X_{f-1,c-1} & X_{f-1,c+1} & ... & X_{f-1,n} 
+\end{bmatrix}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** MatrizCorrida(int** X,int f,int n){
+    int** A = new int*[n];
+    for(int i =0;i<n;i++){
+        A[i]=new int[n];
+    };
+    if(f==0){
+        return X;
+    }else{
+        for(int i =0;i<n-1;i++){
+            for(int j=0;j<n;j++){
+                A[i][j]=X[i+1][j];
+            };
+        };
+        for(int j=0;j<n;j++){
+            A[n-1][j]=X[0][j];
+        };
+        return MatrizCorrida(A,f-1,n);
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Matriz Traspuesta de una matriz cuadrada }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+MatrizTraspuesta: \mathbb{Z}^{**}\times\mathbb{N} &\to \mathbb{Z}^{**}\\
+(X,n) &\mapsto
+\begin{cases}
+\forall_{i=0}^{n} \forall_{j=0}^{n} X_{i,j}= X_{j,i}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** MatrizTraspuesta(int** X, int n){
+    int** Y = new int*[n];
+    for(int i =0;i<n;i++){
+        Y[i]= new int[n];
+    };
+    for(int i=0;i<n;i++){
+        for(int j =0;j<n;j++){
+            Y[i][j]=X[j][i];
+        };
+    };
+    return Y;
+};
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Matriz Inversa }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+MatrizInversa: \mathbb{Z}^{**}\times\mathbb{N} &\to \mathbb{Z}^{**}\\
+(X,n) &\mapsto
+\begin{cases}
+\begin{bmatrix}
+-X_{2,2} & X_{1,2} \\
+X_{2,1} & -X_{1,1}  \\
+\end{bmatrix},& n=2\\
+\forall_{i=0}^{n} \forall_{j=0}^{n}: X_{i,j}=-1^j*DeterminanteMatriz(Adjunta(MatrizTraspuesta(X,n),i,j,n),n-1)/Determinantematriz(X,n),& \text{En otro caso.}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double** MatrizInversa(int** X, int n){
+    double det = DeterminanteMatriz(X,n);
+    double** A = new double*[n];
+    for(int i =0;i<n;i++){
+        A[i]=new double[n];
+    };
+    if(n==2){
+        A[0][0]= (X[1][1])/det;
+        A[0][1]= -(X[0][1])/det;
+        A[1][0]= -(X[1][0])/det;
+        A[1][1]= (X[0][0])/det;
+        return A;
+    }else{
+        for(int i=0;i<n;i++){
+            for(int j =0;j<n;j++){
+                A[i][j]=Potencia(-1,j)*(DeterminanteMatriz(Adjunta(MatrizTraspuesta(X,n),i,j,n),n-1))/det;
+            };
+        };
+        return A;
+    };
+};
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Adjunta de la posición del componente de una matríz en la primera fila }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+Adjunta: \mathbb{Z}^{**}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{Z}^{**}\\
+(X,c,n) &\mapsto
+\begin{cases}
+\begin{bmatrix}
+X_{2,2} & X_{2,3} & X_{2,c-1} & X_{2,c+1} & ...& X_{2,n} \\
+X_{3,2} & X_{3,3} & X_{3,c-1} & X_{3,c+1} & ...& X_{3,n} \\
+X_{4,2} & X_{4,3} & X_{4,c-1} & X_{4,c+1} & ... & X_{4,n} \\
+... & ... & ... & ...& ... & ...\\
+X_{n,2} & X_{n,3} & X_{n,c-1} & X_{n,c+1} & ... & X_{n,n} 
+\end{bmatrix}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** Adjunta(int**X, int c, int n){
+    int** A = new int*[n];
+    for(int i =0;i<n;i++){
+        A[i]=new int[n];
+    };
+    int y=0;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            if(c==j){
+                y=1;
+                A[i][j]=X[i+1][j+y];
+            }else{
+                A[i][j]=X[i+1][j+y];
+            };
+        };
+        y=0;
+    };
+    return A;
+};
+
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Adjunta de un componente determinado de una matríz }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+Adjunta: \mathbb{Z}^{**}\times\mathbb{N}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{Z}^{**}\\
+(X,f,c,n) &\mapsto
+\begin{cases}
+Adjunta(X,c,n-1),&n=1\\
+Adjunta(MatrizCorrida(X,f,n),c,n-1),&\text{En otro caso}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** Adjunta(int**X,int f, int c, int n){
+    if(f==0){
+        return Adjunta(X,c,n-1);
+    }else{
+        return Adjunta(MatrizCorrida(X,f,n),c,n-1);
+    };
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Girar matriz cuadrada 90 grados en el sentido contrario de las manecillas del reloj }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+GirarMatrizContManecillas: \mathbb{Z}^{**}\times\mathbb{N} &\to \mathbb{Z}^{**}\\
+(X,n) &\mapsto
+\begin{cases}
+\forall_{i=0}^{n} \forall_{j=0}^{n}: X_{i,j}=X_{j,n-i-1}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** GirarMatrizContManecillas(int** X, int n){
+    int** A = new int*[n];
+    for(int i =0;i<n;i++){
+        A[i]=new int[n];
+    };
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+                A[i][j]= X[j][n-1-i];
+        };
+    };
+    return A;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Solución al sistema de ecuaciones $n$x$n$ }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+SistemaEcuaciones: \mathbb{R}^{**}\times\mathbb{R}^{*}\times\mathbb{N} &\to \mathbb{R}^{*}\\
+(X,S,n) &\mapsto
+\begin{cases}
+T :\forall_{i=0}^{n}:  T_{i} = \dfrac{MatrizReemplazada(X,S,i,n)}{DeterminanteMatriz(X,n)}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+double* SistemaEcuaciones(int**X, int* S, int n){
+    double* T = new double[n];
+    int det = DeterminanteMatriz(X,n);
+    for(int i =0;i<n;i++){
+        T[i]=DeterminanteMatriz(MatrizReemplazada(X,S,i,n),n)/det;
+    };
+    return T;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Matriz con una columna reemplazada por un arreglo }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+MatrizReemplazada: \mathbb{Z}^{**}\times\mathbb{Z}^{*}\times\mathbb{N}\times\mathbb{N} &\to \mathbb{Z}^{*}\\
+(X,S,i,n) &\mapsto
+\begin{cases}
+\begin{bmatrix}
+X_{0,0} & X_{0,i-1} & S_{0} & X_{0,i+1} & ...& X_{0,n} \\
+X_{1,0} & X_{1,i-1} & S_{1} & X_{1,i+1} & ...& X_{1,n} \\
+X_{2,0} & X_{2,i-1} & S_{2} & X_{2,i+1} & ... & X_{2,n} \\
+... & ... & ... & ...& ... & ...\\
+X_{n,0} & X_{n,i-1} & S_{3} & X_{n,i+1} & ... & X_{n,n}
+\end{bmatrix}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** MatrizReemplazada(int** X, int* S, int k, int n){
+    int** A = CrearMatrizInt(n,n);
+    for(int i =0;i<n;i++){
+        for(int j =0;j<k;j++){
+            A[i][j]=X[i][j];
+        };
+    };
+    for(int i=0;i<n;i++){
+        A[i][k]=S[i];
+    };
+    for(int i =0;i<n;i++){
+        for(int j =k+1;j<n;j++){
+            A[i][j]=X[i][j];
+        };
+    };
+    return A;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\begin{problem} \emph{Matriz en espiral }\\
+\begin{description}
+\item[Modelo Matemático:]
+\begin{align*}
+Espiral: \mathbb{Z}^{*}\times\mathbb{N} &\to \mathbb{Z}^{**}\\
+(X,n^2) &\mapsto
+\begin{cases}
+\forall_{i=0}^{2n-1} \left(\forall_{j=0}^{n-p}: X_{o,j+m}=X_{cont};cont=cont+1\right); p=p+\frac{1}{2};m=m+\frac{1}{4};o+1=o+\frac{1}{4}
+\end{cases}
+\end{align*}
+%
+\item[Codificación \textsf{C++}:]\hfill
+%
+\begin{verbatim}
+int** Espiral(int* X,int n){
+    int a = Raiz2(n);
+    int** A = CrearMatrizInt(a,a);
+    for(int i=0;i<a;i++){
+        for(int j=0;j<a;j++){
+            A[i][j]=0;
+        };
+    };
+    int m = 0;
+    int p = 0;
+    int o = 0;
+    int cont = 0;
+    for(int i=0;i<2*a-1;i++){
+        for(int j = 0;j<a-p;j++){
+            A[o][j+m]=X[cont];
+            cont++;
+        };
+        A=GirarMatrizContManecillas(A,a);
+        if(i%2==0){
+            p++;
+        };
+        if(i%4==0){
+            m++;
+        };
+        if((i+1)%4==0){
+            o++;
+        };
+    };
+    int b=(2*a-1)%4;
+    for(int i=0; i<4-b;i++){
+        A=GirarMatrizContManecillas(A,a);
+    };
+    return A;
+};
+\end{verbatim}
+\end{description}
+\end{problem}
+
+\end{document}
